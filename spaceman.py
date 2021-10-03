@@ -8,8 +8,12 @@
 
 #Randomness that will require us to import the random module
 
-#Take in a list of words from a text document and pick one that will be guessed
+#Take in a list of words from a text document 
+#Function to return a word from the word list
+#Function to hide the secret word and replace the length with underscores
 
-#Once the words is selected, function to hide the secret word and replace the length with underscores
+#Function to print the underscores to the screen
 #Return the secret word
+
+
 
