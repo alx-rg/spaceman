@@ -138,6 +138,15 @@ def letters_not_guessed_yet(letters_guessed):
     #RETURN the string the string of letters that have not been guessed yet out of the function
     return letters_left
 
+def game_win_condition(secret_word, letters_guessed):
+    count = 0
+    for letter in letters_guessed:
+        if letter in secret_word:
+            count += 1
+            if count == len(secret_word):
+                return True
+            else:
+                return False
 
 #def spaceman(secret_word):
 '''
@@ -149,13 +158,22 @@ def letters_not_guessed_yet(letters_guessed):
 
 
 def spaceman(secret_word):
-    letters_not_guessed_yet = []
+    letters_guessed = []
     guess_times = 7
 
     print('Welcome to Spaceman, you have 7 guesses to figure out what word I am thinking of. Good luck')
     word_is_x_letters_long = len(secret_word)
     print(f'The word in question is {word_is_x_letters_long} letters long')
-    while 
+    while not (game_win_condition(secret_word, letters_not_guessed_yet)) and guess_times != 0:
+        print(f'You have {guess_times} left to get the full word.')
+        print(f'Letters left to guess are: {letters_not_guessed_yet(letters_guessed)}')
+        guess_input = input('Please guess a letter: ')
+        guess = guess_input.lower()
+
+    if guess in letters_guessed:
+        print('Choose a different letter, you already used this one')
+        
+
     #TODO: show the player information about the game according to the project spec
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
