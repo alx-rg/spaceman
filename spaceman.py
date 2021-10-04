@@ -35,7 +35,7 @@ def load_word():
     return secret_word
 
 #Test that we are getting a random word
-print(load_word())
+#print(load_word())
 
 #FUNCTION that checks if all the letters guessed are the letters in the secret word
 def is_word_guessed(secret_word, letters_guessed):
@@ -145,8 +145,17 @@ def letters_not_guessed_yet(letters_guessed):
     Args:
       secret_word (string): the secret word to guess.
     '''
+#   
 
 
+def spaceman(secret_word):
+    letters_not_guessed_yet = []
+    guess_times = 7
+
+    print('Welcome to Spaceman, you have 7 guesses to figure out what word I am thinking of. Good luck')
+    word_is_x_letters_long = len(secret_word)
+    print(f'The word in question is {word_is_x_letters_long} letters long')
+    while 
     #TODO: show the player information about the game according to the project spec
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
@@ -160,8 +169,8 @@ def letters_not_guessed_yet(letters_guessed):
 
 
 
+    #These function calls that will start the game
 
-
-#These function calls that will start the game
-#secret_word = load_word()
-#spaceman(secret_word)
+secret_word = load_word()
+print (secret_word)
+spaceman(secret_word)
