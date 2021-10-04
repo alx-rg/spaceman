@@ -27,16 +27,28 @@ def load_word():
     words_list = f.readlines()
     #CLOSE the list of words text file.
     f.close()
-
+    #
     words_list = words_list[0].split(' ') #comment this line out if you use a words.txt file with each word on a new line
     #SELECT a word at random in the variable (words_list) 
     secret_word = random.choice(words_list)
     #RETURN the secret_word in the function
     return secret_word
+
+#Test that we are getting a random word
 print(load_word())
 
-#def is_word_guessed(secret_word, letters_guessed):
-'''
+#FUNCTION that checks if all the letters guessed are the letters in the secret word
+def is_word_guessed(secret_word, letters_guessed):
+    #CHECK if the all the letters guessed by user are in the secret word (Victory condition)
+    if letters_guessed in secret_word:
+    #IF yes then return TRUE
+        return True
+    #ELSE if the letters are not all in the secret work, return FALSE
+    else:
+        return False
+
+
+    '''
     A function that checks if all the letters of the secret word have been guessed.
     Args:
         secret_word (string): the random word the user is trying to guess.
@@ -61,9 +73,16 @@ print(load_word())
 
 #    pass
 
-
-#def is_guess_in_word(guess, secret_word):
-'''
+#FUNCTION that checks if the letter guessed by user is a in the secret word
+def is_guess_in_word(guess, secret_word):
+    if guess in secret_word:
+    #CHECK if the letter guessed by user is in the secret word
+        return True
+    #IF yes then return TRUE
+    else:
+     #ELSE if the letter guessed is not in the secret work, return FALSE
+        return False
+    '''
     A function to check if the guessed letter is in the secret word
     Args:
         guess (string): The letter the player guessed this round
