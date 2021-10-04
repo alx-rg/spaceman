@@ -23,7 +23,7 @@ def load_word():
     '''
     #IMPORT a list of words from text file and READ list
     f = open('words.txt', 'r')
-    #PLACE the list of words into a variable (words_list)
+    #SAVE the list of words into a variable (words_list)
     words_list = f.readlines()
     #CLOSE the list of words text file.
     f.close()
@@ -31,7 +31,7 @@ def load_word():
     words_list = words_list[0].split(' ') #comment this line out if you use a words.txt file with each word on a new line
     #SELECT a word at random in the variable (words_list) 
     secret_word = random.choice(words_list)
-    #RETURN the secret_word in the function
+    #STORE the secret_word in the function
     return secret_word
 
 #Test that we are getting a random word
@@ -39,13 +39,16 @@ print(load_word())
 
 #FUNCTION that checks if all the letters guessed are the letters in the secret word
 def is_word_guessed(secret_word, letters_guessed):
-    #CHECK if the all the letters guessed by user are in the secret word (Victory condition)
+    #VERIFY if the all the letters guessed by user are in the secret word (Victory condition)
     if letters_guessed in secret_word:
-    #IF yes then return TRUE
+    #IF all the letters used are in the secret word THEN 
+        #Return TRUE
         return True
-    #ELSE if the letters are not all in the secret work, return FALSE
+    #ELSE if the letters are not all in the secret work THEN
+        #Return FALSE
     else:
         return False
+    #ENDIF
 
 
     '''
@@ -59,8 +62,24 @@ def is_word_guessed(secret_word, letters_guessed):
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
  #   pass
 
-#def get_guessed_word(secret_word, letters_guessed):
-'''
+#FUNCTION used to show string of letters guessed so far and underscores for letters yet to be guessed
+def get_guessed_words(secret_word, letters_guessed):
+    #SAVE string of letters and _ in a variable called "guess"
+    guess=''
+    #DO for each letter in the secret word 
+    for i in range(len(secret_word)):
+    #IF the letter guessed is in the secret word THEN
+        #Add the letter to the guess character string
+        if secret_word[i] in letters_guessed:
+            guess += secret_word[i]
+    #ELSE
+        #add an underscore "_" to the character string
+        else:
+            guess += '_'
+    #DISPLAY the resulting character string with the letters and underscores 
+    return guess    
+
+    '''
     A function that is used to get a string showing the letters guessed so far in the secret word and underscores for letters that have not been guessed yet.
     Args: 
         secret_word (string): the random word the user is trying to guess.
@@ -71,18 +90,29 @@ def is_word_guessed(secret_word, letters_guessed):
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
 
+    # secret_word = 'apple'
+    # letters_guessed = ['a', 'l', 'e']
+    # get_guessed_words(secret_word, letters_guessed)
+    # print(secret_word)
+    # print(letters_guessed)
+    # print(get_guessed_words)
 #    pass
 
-#FUNCTION that checks if the letter guessed by user is a in the secret word
+#FUNCTION that checks if the letter guessed by user is in the secret word
 def is_guess_in_word(guess, secret_word):
     if guess in secret_word:
     #CHECK if the letter guessed by user is in the secret word
         return True
-    #IF yes then return TRUE
+    #IF yes THEN 
+        #Return TRUE
     else:
-     #ELSE if the letter guessed is not in the secret work, return FALSE
+    #ELSE if the letter guessed is not in the secret work THEN
+        #Return FALSE
         return False
-    '''
+    #ENDIF
+
+
+'''
     A function to check if the guessed letter is in the secret word
     Args:
         guess (string): The letter the player guessed this round
@@ -94,7 +124,19 @@ def is_guess_in_word(guess, secret_word):
 
 #    pass
 
+#FUNCTION that checks the alphabet against letters already guessed and returns the letters that are still available to be used
 
+def letters_not_guessed_yet(letters_guessed):
+    #INITIALIZE an empty variable that will be used to accept the letters that have not been used
+    letters_left = ''
+    #FOR the letters in the alphabet
+    for letter in 'abcdefghijklmnopqrstuv':
+        #IF the letters of the alphabet are not already used THEN
+            #STORE the letters that have not been used in a the empty variable above containing so that it now contains the string of letters
+        if  letter not in letters_guessed:
+            letters_left += letter
+    #RETURN the string the string of letters that have not been guessed yet out of the function
+    return letters_left
 
 
 #def spaceman(secret_word):
