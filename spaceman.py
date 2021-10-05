@@ -38,14 +38,16 @@ def load_word():
 
 #print(load_word())
 
-#FUNCTION that checks if all the letters guessed are the letters in the secret word
+#FUNCTION that checks if all the letters guessed are the the letters in the secret word (Victory condition)
 def is_word_guessed(secret_word, letters_guessed):
-    
+#FOR each individual letter in the secret word 
     for character in secret_word:
+    #IF any letter from the secret word are still in the letter left to be guessed THEN
+    #RETURN False (Meaning you haven't won yet so keep guessing) 
         if character not in letters_guessed:
             
             return False
-    
+    #ELSE Return True (Meaning you guessed all the letter so you won!)
     return True
     
     #VERIFY if the all the letters guessed by user are in the secret word (Victory condition)
