@@ -1,26 +1,8 @@
-#Below are aspects of the program that will be required
-
-#The game needs to explain what's going to happen with the player.
-#How to play, how many guesses
-
-#Randomness that will require us to import the random module
-
-#Take in a list of words from a text document 
-#Function to return a word from the word list
-#Function to hide the secret word and replace the length with underscores
-
-#Function to print the underscores to the screen
-#Return the secret word
 
 import random
 
 def load_word():
-    '''
-    A function that reads a text file of words and randomly selects one to use as the secret word
-        from the list.
-    Returns: 
-           string: The secret word to be used in the spaceman guessing game
-    '''
+
     #IMPORT a list of words from text file and READ list
     f = open('words.txt', 'r')
     #SAVE the list of words into a variable (words_list)
@@ -35,7 +17,6 @@ def load_word():
     return secret_word
 
 #Test that we are getting a random word
-
 #print(load_word())
 
 #FUNCTION that checks if all the letters guessed are the the letters in the secret word (Victory condition)
@@ -50,30 +31,6 @@ def is_word_guessed(secret_word, letters_guessed):
     #ELSE Return True (Meaning you guessed all the letter so you won!)
     return True
     
-    #VERIFY if the all the letters guessed by user are in the secret word (Victory condition)
-    #if letters_guessed in secret_word:
-    #IF all the letters used are in the secret word THEN 
-        #Return TRUE
-    #    return True
-    #ELSE if the letters are not all in the secret work THEN
-        #Return FALSE
-    #else:
-    #    return False
-    #ENDIF
-
-
-
-
-    '''
-    A function that checks if all the letters of the secret word have been guessed.
-    Args:
-        secret_word (string): the random word the user is trying to guess.
-        letters_guessed (list of strings): list of letters that have been guessed so far.
-    Returns: 
-        bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
-    '''
-    # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
- #   pass
 
 #FUNCTION used to show string of letters guessed so far and underscores for letters yet to be guessed
 def get_guessed_words(secret_word, letters_guessed):
@@ -93,26 +50,6 @@ def get_guessed_words(secret_word, letters_guessed):
     return guess    
 
 
-
-'''
-    A function that is used to get a string showing the letters guessed so far in the secret word and underscores for letters that have not been guessed yet.
-    Args: 
-        secret_word (string): the random word the user is trying to guess.
-        letters_guessed (list of strings): list of letters that have been guessed so far.
-    Returns: 
-        string: letters and underscores.  For letters in the word that the user has guessed correctly, the string should contain the letter at the correct position.  For letters in the word that the user has not yet guessed, shown an _ (underscore) instead.
-    '''
-
-    #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-
-    # secret_word = 'apple'
-    # letters_guessed = ['a', 'l', 'e']
-    # get_guessed_words(secret_word, letters_guessed)
-    # print(secret_word)
-    # print(letters_guessed)
-    # print(get_guessed_words)
-#    pass
-
 #FUNCTION that checks if the letter guessed by user is in the secret word
 def is_guess_in_word(guess, secret_word):
     if guess in secret_word:
@@ -126,18 +63,6 @@ def is_guess_in_word(guess, secret_word):
         return False
     #ENDIF
 
-
-'''
-    A function to check if the guessed letter is in the secret word
-    Args:
-        guess (string): The letter the player guessed this round
-        secret_word (string): The secret word
-    Returns:
-        bool: True if the guess is in the secret_word, False otherwise
-    '''
-    #TODO: check if the letter guess is in the secret word
-
-#    pass
 
 #FUNCTION that checks the alphabet against letters already guessed and returns the letters that are still available to be used
 
@@ -153,108 +78,120 @@ def letters_not_guessed_yet(letters_guessed):
     #RETURN the string the string of letters that have not been guessed yet out of the function
     return letters_left
 
-""" def game_win_condition(secret_word, letters_guessed):
-    count = 0
-    for letter in letters_guessed:
-        if letter in secret_word:
-            count += 1
-            if count == len(secret_word):
-                return True
-            else:
-                return False """
-
-#def spaceman(secret_word):
-'''
-    A function that controls the game of spaceman. Will start spaceman in the command line.
-    Args:
-      secret_word (string): the secret word to guess.
-    '''
-#   
-
-
-
-
+#FUNCTION that controls the game of spaceman and brings in all the functions into one.
 def spaceman(secret_word):
 
-    #print(secret_word)
+    print(secret_word)
+
+    #SET and empty list for the letters that the user will guess
     letters_guessed = ['']
+    #SET the number of guesses allowed by the user to 7
     guess_times = 7
 
-    print('Welcome to Spaceman, you have 7 guesses to figure out what word I am thinking of. Good luck')
+    #in this code any '\n' is a line break
+    print('\n')
+    #DISPLAY instructions for the user to understand the game 
+    print('Welcome to Spaceman, the object of the game is to guess the secret word, doing so one letter at a time.')
+    print('You have 7 guesses to figure out what word I am thinking of. Good luck!')
     print('\n')
 
     word_is_x_letters_long = len(secret_word)
-
+    #DISPLAY the number corresponding to the length of the word. i.e "Apple" is 5 letters long
     print(f'The word in question is {word_is_x_letters_long} letters long')
     print('\n')
     
+    #SET a variable to true. This variable determines if the player wants to play again, if it is false, then the player has said "n". 
     play_repeat = True
+    #DOWHILE True = play the game again
     while play_repeat:
     
+        #DOWHILE False if the letters guessed do not match the secret word, Keep playing. AND if the guess is not equal to 0, Keep playing
         while is_word_guessed(secret_word, letters_guessed) is False and guess_times != 0:
-            print(f'You have {guess_times} guesses left to get the full word.')
+            #DISPLAY the amount of guesses left to find the secret word.
+            print(f'You have {guess_times} guesses left to get the secret word.')
+            #DISPLAY the letters that are left for the player to use.
             print(f'Letters left to guess are: {letters_not_guessed_yet(letters_guessed)}')
             print('\n')
+            #PROMPT the user to guess a letter
             guess_input = input('Please guess a letter: ')
+            #GET user input and save it in a variable
+            #SAVE / TRANSFORM user input regardless of upper or lowercase to a lowercase. 
             guess = guess_input.lower()
 
+            #IF the letter guessed by user is already one of the letters previously guessed THEN
             if guess in letters_guessed:
+                #DISPLAY a message letting user know that they already used the letter.
                 print(f'Choose a different letter, you already used this one {get_guessed_words(secret_word, letters_guessed)}')
                 print('\n')
 
+            #ELSE IF the guess is not a letter of the alphabet THEN
             elif guess not in "abcdefghijklmnopqrstuvwxyz":
+                #DISPLAY a message informing them to chose a letter
                 print('Please choose a letter, that is not a letter')
                 print('\n')
 
+            #ELSE IF the letter is in the secret word and hasn't been used yet THEN
             elif is_guess_in_word(guess, secret_word):
+                #ADD the letter guessed into the list of letters that have been guessed so far
                 letters_guessed += guess
+                #DISPLAY a well done for guessing the right letter message
                 print(f'Good guess this is what you have: {get_guessed_words(secret_word, letters_guessed)}')
                 print('\n')
 
+            #ELSE the letter is not in the secret word THEN
             else:
+                #ADD the letter guessed into the list of letters that have been guessed so far
                 letters_guessed += guess
+                #DISPLAY a message that this is not a letter in the word and to guess again
                 print (f'That letter is not in the word, try again : {get_guessed_words(secret_word, letters_guessed)}')
                 print('\n')
+                #SUBSTRACT 1 from the total number of guesses left
                 guess_times -= 1
 
+        #IF the number of guesses reaches 0 THEN
         if guess_times == 0:
-            print (f'No more guesses, the word was: {secret_word}')
+            #DISPLAY that the user lost, and OUTPUT the secret word THEN
+            print (f'OH NO, you have no more guesses, the word was: {secret_word}')
             print ('\n')
+            #BREAK out of the loop
             break
+        #ELSE the number of guesses was above 0 and we found the word
         else:
+            #DISPLAY a celebratory message for the use and OUTPUT the secret word again THEN
             print (f'Congratulations! You WIN! The secret word was "{secret_word}"!')
             print ('\n')
             break
-
+        #ENDIF
+    
+    #PROMPT the user to enter 'y' to play again or 'n' to stop playing
     user_answer = input('would you like to play spaceman again? (y/n) ')
+    #GET user's answer
+    #IF user answered 'y' THEN
     if user_answer == 'y':
+        #RETURN True
         play_repeat = True
+        #INITIALIZE the spaceman game once again
         spaceman(load_word())
+    #ELSE the answer was 'n'
     else:
+        #DISPLAY a thank you for playing message
         print('Thanks for playing, bye now!')
+        print ('\n')
+        #RETURN False breaking us out of the WHILE loop and exiting
         play_repeat = False
 
-
-
+#CALLS / RUNS the spaceman game and includes the secret word.
+spaceman(load_word())
         
+    #DONE-TODO: show the player information about the game according to the project spec - DONE
+    #DONE-TODO: Ask the player to guess one letter per round and check that it is only one letter - DONE
+    #DONE-TODO: Check if the guessed letter is in the secret or not and give the player feedback - DONE
+    #DONE-TODO: show the guessed word so far - DONE
+    #DONE-TODO: check if the game has been won or lost - DONE
 
-    #TODO: show the player information about the game according to the project spec
-
-    #TODO: Ask the player to guess one letter per round and check that it is only one letter
-
-    #TODO: Check if the guessed letter is in the secret or not and give the player feedback
-
-    #TODO: show the guessed word so far
-
-    #TODO: check if the game has been won or lost
-
-
-
-
-    #These function calls that will start the game
-
-
-""" print ('\n')
+""" 
+TESTING THE FUNCTIONS TO CONFIRM THE OUTPUT WAS AS EXPECTED
+print ('\n')
 print(load_word())
 testwordtoguess=load_word
 
@@ -274,9 +211,10 @@ getguesswordstest = get_guessed_words('apple', 'abcdefg')
 print(getguesswordstest)
 
 lettersfortest = letters_not_guessed_yet('abcdedf')
-print(lettersfortest) """
+print(lettersfortest) 
 
-#secret_word = load_word()
-#print (secret_word)
-spaceman(load_word())
+secret_word = load_word()
+print (secret_word)
+
+"""
 
