@@ -16,9 +16,6 @@ def load_word():
     #STORE the secret_word in the function
     return secret_word
 
-#Test that we are getting a random word
-#print(load_word())
-
 #FUNCTION that checks if all the letters guessed are the the letters in the secret word (Victory condition)
 def is_word_guessed(secret_word, letters_guessed):
 #FOR each individual letter in the secret word 
@@ -80,8 +77,6 @@ def letters_not_guessed_yet(letters_guessed):
 
 #FUNCTION that controls the game of spaceman and brings in all the functions into one.
 def spaceman(secret_word):
-
-    print(secret_word)
 
     #SET and empty list for the letters that the user will guess
     letters_guessed = ['']
