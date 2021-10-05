@@ -40,16 +40,26 @@ def load_word():
 
 #FUNCTION that checks if all the letters guessed are the letters in the secret word
 def is_word_guessed(secret_word, letters_guessed):
+    
+    for character in secret_word:
+        if character not in letters_guessed:
+            
+            return False
+    
+    return True
+    
     #VERIFY if the all the letters guessed by user are in the secret word (Victory condition)
-    if letters_guessed in secret_word:
+    #if letters_guessed in secret_word:
     #IF all the letters used are in the secret word THEN 
         #Return TRUE
-        return True
+    #    return True
     #ELSE if the letters are not all in the secret work THEN
         #Return FALSE
-    else:
-        return False
+    #else:
+    #    return False
     #ENDIF
+
+
 
 
     '''
@@ -141,7 +151,7 @@ def letters_not_guessed_yet(letters_guessed):
     #RETURN the string the string of letters that have not been guessed yet out of the function
     return letters_left
 
-def game_win_condition(secret_word, letters_guessed):
+""" def game_win_condition(secret_word, letters_guessed):
     count = 0
     for letter in letters_guessed:
         if letter in secret_word:
@@ -149,7 +159,7 @@ def game_win_condition(secret_word, letters_guessed):
             if count == len(secret_word):
                 return True
             else:
-                return False
+                return False """
 
 #def spaceman(secret_word):
 '''
@@ -163,6 +173,8 @@ def game_win_condition(secret_word, letters_guessed):
 
 
 def spaceman(secret_word):
+
+    #print(secret_word)
     letters_guessed = ['']
     guess_times = 7
 
@@ -173,40 +185,53 @@ def spaceman(secret_word):
 
     print(f'The word in question is {word_is_x_letters_long} letters long')
     print('\n')
-
-    while not (game_win_condition(secret_word, letters_not_guessed_yet(letters_guessed))) and guess_times != 0:
-        print(f'You have {guess_times} guesses left to get the full word.')
-        print(f'Letters left to guess are: {letters_not_guessed_yet(letters_guessed)}')
-        print('\n')
-        guess_input = input('Please guess a letter: ')
-        guess = guess_input.lower()
-
-        if guess in letters_guessed:
-            print(f'Choose a different letter, you already used this one {get_guessed_words(secret_word, letters_guessed)}')
-            print('\n')
-
-        elif guess not in "abcdefghijklmnopqrstuvwxyz":
-            print('Please choose a letter, that is not a letter')
-            print('\n')
-
-        elif is_guess_in_word(guess, secret_word):
-            letters_guessed += guess
-            print(f'Good guess this is what you have: {get_guessed_words(secret_word, letters_guessed)}')
-            print('\n')
-
-        else:
-            letters_guessed += guess
-            print (f'That letter is not in the word, try again : {get_guessed_words(secret_word, letters_guessed)}')
-            print('\n')
-            guess_times -= 1
-
-    if guess_times == 0:
-        print (f'No more guesses, the word was: {secret_word}')
-        print ('\n')
-    else:
-        print ("Congratulations!")
-        print ('\n')
     
+    play_repeat = True
+    while play_repeat:
+    
+        while is_word_guessed(secret_word, letters_guessed) is False and guess_times != 0:
+            print(f'You have {guess_times} guesses left to get the full word.')
+            print(f'Letters left to guess are: {letters_not_guessed_yet(letters_guessed)}')
+            print('\n')
+            guess_input = input('Please guess a letter: ')
+            guess = guess_input.lower()
+
+            if guess in letters_guessed:
+                print(f'Choose a different letter, you already used this one {get_guessed_words(secret_word, letters_guessed)}')
+                print('\n')
+
+            elif guess not in "abcdefghijklmnopqrstuvwxyz":
+                print('Please choose a letter, that is not a letter')
+                print('\n')
+
+            elif is_guess_in_word(guess, secret_word):
+                letters_guessed += guess
+                print(f'Good guess this is what you have: {get_guessed_words(secret_word, letters_guessed)}')
+                print('\n')
+
+            else:
+                letters_guessed += guess
+                print (f'That letter is not in the word, try again : {get_guessed_words(secret_word, letters_guessed)}')
+                print('\n')
+                guess_times -= 1
+
+        if guess_times == 0:
+            print (f'No more guesses, the word was: {secret_word}')
+            print ('\n')
+            break
+        else:
+            print (f'Congratulations! You WIN! The secret word was "{secret_word}"!')
+            print ('\n')
+            break
+
+    user_answer = input('would you like to play spaceman again? (y/n) ')
+    if user_answer == 'y':
+        play_repeat = True
+        spaceman(load_word())
+    else:
+        print('Thanks for playing, bye now!')
+        play_repeat = False
+
 
 
         
@@ -252,3 +277,4 @@ print(lettersfortest) """
 #secret_word = load_word()
 #print (secret_word)
 spaceman(load_word())
+
