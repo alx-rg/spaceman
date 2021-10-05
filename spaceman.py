@@ -35,6 +35,7 @@ def load_word():
     return secret_word
 
 #Test that we are getting a random word
+
 #print(load_word())
 
 #FUNCTION that checks if all the letters guessed are the letters in the secret word
@@ -79,7 +80,9 @@ def get_guessed_words(secret_word, letters_guessed):
     #DISPLAY the resulting character string with the letters and underscores 
     return guess    
 
-    '''
+
+
+'''
     A function that is used to get a string showing the letters guessed so far in the secret word and underscores for letters that have not been guessed yet.
     Args: 
         secret_word (string): the random word the user is trying to guess.
@@ -157,21 +160,55 @@ def game_win_condition(secret_word, letters_guessed):
 #   
 
 
+
+
 def spaceman(secret_word):
-    letters_guessed = []
+    letters_guessed = ['']
     guess_times = 7
 
     print('Welcome to Spaceman, you have 7 guesses to figure out what word I am thinking of. Good luck')
+    print('\n')
+
     word_is_x_letters_long = len(secret_word)
+
     print(f'The word in question is {word_is_x_letters_long} letters long')
-    while not (game_win_condition(secret_word, letters_not_guessed_yet)) and guess_times != 0:
-        print(f'You have {guess_times} left to get the full word.')
+    print('\n')
+
+    while not (game_win_condition(secret_word, letters_not_guessed_yet(letters_guessed))) and guess_times != 0:
+        print(f'You have {guess_times} guesses left to get the full word.')
         print(f'Letters left to guess are: {letters_not_guessed_yet(letters_guessed)}')
+        print('\n')
         guess_input = input('Please guess a letter: ')
         guess = guess_input.lower()
 
-    if guess in letters_guessed:
-        print('Choose a different letter, you already used this one')
+        if guess in letters_guessed:
+            print(f'Choose a different letter, you already used this one {get_guessed_words(secret_word, letters_guessed)}')
+            print('\n')
+
+        elif guess not in "abcdefghijklmnopqrstuvwxyz":
+            print('Please choose a letter, that is not a letter')
+            print('\n')
+
+        elif is_guess_in_word(guess, secret_word):
+            letters_guessed += guess
+            print(f'Good guess this is what you have: {get_guessed_words(secret_word, letters_guessed)}')
+            print('\n')
+
+        else:
+            letters_guessed += guess
+            print (f'That letter is not in the word, try again : {get_guessed_words(secret_word, letters_guessed)}')
+            print('\n')
+            guess_times -= 1
+
+    if guess_times == 0:
+        print (f'No more guesses, the word was: {secret_word}')
+        print ('\n')
+    else:
+        print ("Congratulations!")
+        print ('\n')
+    
+
+
         
 
     #TODO: show the player information about the game according to the project spec
@@ -189,6 +226,29 @@ def spaceman(secret_word):
 
     #These function calls that will start the game
 
-secret_word = load_word()
-print (secret_word)
-spaceman(secret_word)
+
+""" print ('\n')
+print(load_word())
+testwordtoguess=load_word
+
+iswordguessedtest = is_word_guessed ('testwordtoguess', 'abcdefghijklmnopqrstuvwxyz') #TRUE
+print(iswordguessedtest)
+print ('above should be true')
+
+iswordguessedtest = is_word_guessed ('orange', 'apple') #FALSE
+print(iswordguessedtest)
+print('above should be false')
+
+isguessinwordtest = is_guess_in_word('a', 'apple')
+print(isguessinwordtest)
+
+#apple
+getguesswordstest = get_guessed_words('apple', 'abcdefg')
+print(getguesswordstest)
+
+lettersfortest = letters_not_guessed_yet('abcdedf')
+print(lettersfortest) """
+
+#secret_word = load_word()
+#print (secret_word)
+spaceman(load_word())
